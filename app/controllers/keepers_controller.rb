@@ -5,10 +5,10 @@ class KeepersController < ApplicationController
   end
 
   def create
-    animal = Animal.find(params[:animal_id])
-    keeper = animal.keepers.new(keeper_params)
-    if keeper.save
-      redirect_to animal_path(animal)
+    @animal = Animal.find(params[:animal_id])
+    @keeper = @animal.keepers.new(keeper_params)
+    if @keeper.save
+      redirect_to animal_path(@animal)
       flash[:notice] = "Successfully added a keeper"
     else
       render "new"

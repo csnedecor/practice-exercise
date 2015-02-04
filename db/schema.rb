@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204001318) do
+ActiveRecord::Schema.define(version: 20150204012851) do
 
   create_table "animals", force: :cascade do |t|
     t.string   "name"
@@ -35,5 +35,7 @@ ActiveRecord::Schema.define(version: 20150204001318) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "keepers", ["employee_id", "animal_id"], name: "index_keepers_on_employee_id_and_animal_id", unique: true
 
 end
