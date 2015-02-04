@@ -23,6 +23,9 @@
         <td><%= link_to 'Show', animal %></td>
         <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
         <td><%= link_to 'Destroy', animal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if animal.keepers.empty? %>
+          <td class="red">This animal needs a keeper!</td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

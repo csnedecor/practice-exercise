@@ -29,8 +29,14 @@
       <% end %>
     </ul>
   </p>
+  <div>
+    <%= link_to 'Add a keeper', new_animal_keeper_path(@animal) %>
+  </div>
+  <br>
+<% else %>
+  <p class="red">
+    <strong>This animal needs a keeper assigned! Please <%= link_to 'Add a keeper', new_animal_keeper_path(@animal) %>:</strong>
+  </p>
 <% end %>
-
-<%= link_to 'Add a keeper', new_animal_keeper_path(@animal) %>
 <%= link_to 'Edit', edit_animal_path(@animal) %> |
 <%= link_to 'Back', animals_path %>
