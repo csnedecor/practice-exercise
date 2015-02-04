@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :animals
+  resources :animals do
+    resources :keepers, only: [:new, :create]
+  end
 
   resources :employees
 

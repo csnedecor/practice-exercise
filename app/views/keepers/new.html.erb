@@ -1,0 +1,16 @@
+<%= form_for [@animal, @keeper] do |f| %>
+  <% if @keeper.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@keeper.errors.count, "error") %> prohibited this keeper from being saved:</h2>
+
+    <ul>
+      <% @keeper.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= f.label :keeper %>
+  <%= f.collection_select(:employee_id, Employee.all, :id, :name) %>
+  <%= f.submit "Submit" %>
+<% end %>

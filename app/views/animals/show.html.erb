@@ -20,5 +20,17 @@
   <%= @animal.color %>
 </p>
 
+<% if !@animal.keepers.empty? %>
+  <p>
+    <strong>Keeper(s):</strong>
+    <ul>
+      <% @keepers.each do |keeper| %>
+        <li><%= keeper.employee.name %></li>
+      <% end %>
+    </ul>
+  </p>
+<% end %>
+
+<%= link_to 'Add a keeper', new_animal_keeper_path(@animal) %>
 <%= link_to 'Edit', edit_animal_path(@animal) %> |
 <%= link_to 'Back', animals_path %>
