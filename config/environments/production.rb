@@ -76,6 +76,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
   # Use Dalli for cache store
   config.cache_store = :dalli_store
   # Tell action controller to perform caching

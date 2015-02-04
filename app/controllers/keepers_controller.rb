@@ -10,8 +10,6 @@ class KeepersController < ApplicationController
     if @keeper.save
       redirect_to animal_path(@animal)
       flash[:notice] = "Successfully added a keeper"
-      expire_page controller: :animals, action: :show, id: params[:animal_id]
-      expire_page controller: :animals, action: :index
     else
       render "new"
     end

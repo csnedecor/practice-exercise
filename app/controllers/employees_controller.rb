@@ -1,6 +1,5 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
-  caches_page :index, :show, if: Proc.new { flash.count == 0 }
 
   # GET /employees
   # GET /employees.json
@@ -31,7 +30,6 @@ class EmployeesController < ApplicationController
       if @employee.save
         format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
-        expire_page action: :index
       else
         format.html { render :new }
         format.json { render json: @employee.errors, status: :unprocessable_entity }
@@ -44,8 +42,6 @@ class EmployeesController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
-        expire_page action: :index
-        expire_page action: :show
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else
@@ -59,8 +55,6 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1.json
   def destroy
     @employee.destroy
-    expire_page action: :index
-    expire_page action: :show
     respond_to do |format|
       format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
       format.json { head :no_content }

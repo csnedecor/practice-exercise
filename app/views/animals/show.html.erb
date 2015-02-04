@@ -1,42 +1,43 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @animal.name %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @animal.age %>
-</p>
-
-<p>
-  <strong>Breed:</strong>
-  <%= @animal.breed %>
-</p>
-
-<p>
-  <strong>Color:</strong>
-  <%= @animal.color %>
-</p>
-
-<% if !@animal.keepers.empty? %>
+<% cache @animal do %>
   <p>
-    <strong>Keeper(s):</strong>
-    <ul>
-      <% @keepers.each do |keeper| %>
-        <li><%= keeper.employee.name %></li>
-      <% end %>
-    </ul>
+    <strong>Name:</strong>
+    <%= @animal.name %>
   </p>
-  <div>
-    <%= link_to 'Add a keeper', new_animal_keeper_path(@animal) %>
-  </div>
-  <br>
-<% else %>
-  <p class="red">
-    <strong>This animal needs a keeper assigned! Please <%= link_to 'Add a keeper', new_animal_keeper_path(@animal) %>:</strong>
+
+  <p>
+    <strong>Age:</strong>
+    <%= @animal.age %>
   </p>
+
+  <p>
+    <strong>Breed:</strong>
+    <%= @animal.breed %>
+  </p>
+
+  <p>
+    <strong>Color:</strong>
+    <%= @animal.color %>
+  </p>
+
+  <% if !@animal.keepers.empty? %>
+    <p>
+      <strong>Keeper(s):</strong>
+      <ul>
+        <% @keepers.each do |keeper| %>
+          <li><%= keeper.employee.name %></li>
+        <% end %>
+      </ul>
+    </p>
+    <div>
+      <%= link_to 'Add a keeper', new_animal_keeper_path(@animal) %>
+    </div>
+    <br>
+  <% else %>
+    <p class="red">
+      <strong>This animal needs a keeper assigned! Please <%= link_to 'Add a keeper', new_animal_keeper_path(@animal) %>:</strong>
+    </p>
+  <% end %>
+  <%= link_to 'Edit', edit_animal_path(@animal) %> |
+  <%= link_to 'Back', animals_path %>
 <% end %>
-<%= link_to 'Edit', edit_animal_path(@animal) %> |
-<%= link_to 'Back', animals_path %>
