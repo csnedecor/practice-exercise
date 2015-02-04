@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
-  caches_page only: [:index, :show]
+  caches_page :index, :show, if: Proc.new { flash.count == 0 }
+
   # GET /employees
   # GET /employees.json
   def index
@@ -28,9 +29,9 @@ class EmployeesController < ApplicationController
 
     respond_to do |format|
       if @employee.save
-        expire_page action: :index
         format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
+        expire_page action: :index
       else
         format.html { render :new }
         format.json { render json: @employee.errors, status: :unprocessable_entity }

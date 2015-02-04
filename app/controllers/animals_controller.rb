@@ -1,6 +1,7 @@
 class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
-  caches_page only: [:index, :show]
+
+  caches_page :index, :show, if: Proc.new { flash.count == 0 }
   # GET /animals
   # GET /animals.json
   def index
@@ -46,10 +47,10 @@ class AnimalsController < ApplicationController
   def update
     respond_to do |format|
       if @animal.update(animal_params)
-        expire_page action: :index
-        expire_page action: :show
         format.html { redirect_to @animal, notice: 'Animal was successfully updated.' }
         format.json { render :show, status: :ok, location: @animal }
+        expire_page action: :index
+        expire_page action: :show
       else
         format.html { render :edit }
         format.json { render json: @animal.errors, status: :unprocessable_entity }
@@ -61,12 +62,12 @@ class AnimalsController < ApplicationController
   # DELETE /animals/1.json
   def destroy
     @animal.destroy
-    expire_page action: :index
-    expire_page action: :show
     respond_to do |format|
       format.html { redirect_to animals_url, notice: 'Animal was successfully destroyed.' }
       format.json { head :no_content }
     end
+    expire_page action: :index
+    expire_page action: :show
   end
 
   private
