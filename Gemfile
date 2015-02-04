@@ -43,4 +43,10 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
+  gem "valid_attribute"
+  gem "shoulda-matchers"
+  gem 'capybara'
+  gem 'pry-rails'
+  gem 'launchy'
+  gem 'factory_girl_rails'
 end
