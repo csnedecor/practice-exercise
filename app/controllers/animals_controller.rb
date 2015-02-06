@@ -1,6 +1,5 @@
 class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
-
   # GET /animals
   # GET /animals.json
   def index
@@ -10,6 +9,7 @@ class AnimalsController < ApplicationController
   # GET /animals/1
   # GET /animals/1.json
   def show
+    @keepers = @animal.keepers
   end
 
   # GET /animals/new
@@ -28,7 +28,7 @@ class AnimalsController < ApplicationController
 
     respond_to do |format|
       if @animal.save
-        AnimalMailer.new_animal_created_email(@animal, "test@example.com").deliver_now
+        AnimalMailer.delay.new_animal_created_email(@animal, "test@example.com")
 
         format.html { redirect_to @animal, notice: 'Animal was successfully created.' }
         format.json { render :show, status: :created, location: @animal }

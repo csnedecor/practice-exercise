@@ -38,6 +38,11 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  # Use Dalli for cache store
+  config.cache_store = :dalli_store
+  # Tell action controller to perform caching
+  config.action_controller.perform_caching = true
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

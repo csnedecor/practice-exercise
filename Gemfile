@@ -22,6 +22,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'delayed_job_active_record'
+gem 'cache_digests'
+gem 'actionpack-page_caching'
+gem 'dalli'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -43,4 +47,10 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
+  gem "valid_attribute"
+  gem "shoulda-matchers"
+  gem 'capybara'
+  gem 'pry-rails'
+  gem 'launchy'
+  gem 'factory_girl_rails'
 end
